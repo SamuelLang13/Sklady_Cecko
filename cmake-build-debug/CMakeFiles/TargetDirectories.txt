@@ -1,0 +1,3 @@
+C:/Dev/sklady_v_cecku/cmake-build-debug/CMakeFiles/sklady_v_cecku.dir
+C:/Dev/sklady_v_cecku/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Dev/sklady_v_cecku/cmake-build-debug/CMakeFiles/rebuild_cache.dir
