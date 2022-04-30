@@ -53,17 +53,30 @@ double distance(GPS gps1, GPS gps2);
 
 #define MAX_SIZE 250
 
+int rowCounter(){
+    int rowCount=0;
+    FILE *ptrWarehouse;
+    ptrWarehouse = fopen(WAREHOUSE_DB_FILE, "r");
+    if(ptrWarehouse == NULL){
+        return 1;
+    }
+
+    while((c = fgetc(ptrWarehouse)) != EOF){ //EOF == -1
+        if(c == '\n') {
+            rowCount++;
+        }
+    }
+    return rowCount;
+}
+
 
 
 int main(int argc, char *argv[]) {
 
     int result;
     int linesCounter = 0;
-    int i = 0;
-    char lineInStructure[150] = {0};
-    int placeInStructure = 0;
     char c;
-    char *optstring = ":w:n:e:ad";
+    const char *optstring = ":w:n:e:ad";
 
     while ((result= getopt(argc, argv, optstring)) != -1){
         switch (result){
@@ -87,30 +100,8 @@ int main(int argc, char *argv[]) {
     }
 
     //Vypocet riadkov v .txt
-    FILE *ptrWarehouse;
-    ptrWarehouse = fopen(WAREHOUSE_DB_FILE, "r");
-    if(ptrWarehouse == NULL){
-        return 1;
-    }
-
-    while((c = fgetc(ptrWarehouse)) != EOF){ //EOF == -1
-        if(c == '\n') {
-            linesCounter++;
-        }
-    }
 
     printf("%d\n", linesCounter);
-
-    WAREHOUSE *databaza = malloc(linesCounter* sizeof(WAREHOUSE));
-
-    //sklady
-    while((fgets(lineInStructure, MAX_SIZE,ptrWarehouse)) != EOF){
-        databaza[placeInStructure] =
-        placeInStructure++;
-    }
-
-    free(databaza);
-    fclose(ptrWarehouse);
 
     return 0;
 }
